@@ -29,9 +29,9 @@ I’m using this repo to:
 
 ## 🖼️ Challenge Poster
 
-![Databricks AI Challenge Poster](images/databricks-challenge-poster.png)
+[![Databricks AI Challenge Poster](images/databricks-challenge-poster.png)](https://github.com/santhok187/DatabrickswithIDC_SK187/blob/main/Images/1767097609158.jpg)
 
-*(Make sure to upload the image to your repo and update the path above)*
+
 
 ---
 
