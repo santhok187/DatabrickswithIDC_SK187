@@ -38,10 +38,11 @@ I’m using this repo to:
 ## 📂 Repository Structure
 
 - **`.databricks/`** – Internal metadata and commit logs from Databricks notebooks  
-- **`14 day challenge/`** – Daily notebooks and hands-on exercises from the AI challenge  
+- **`14 day challenge/`** – Daily notebooks, posters, and hands-on exercises from the AI challenge  
+  - **`Day 1/`** – PySpark intro notebook, summary, and poster  
+  - **`Day 2/`** – Spark architecture fundamentals, Kaggle dataset notebook, summary, and poster  
 - **`Images/`** – Posters, screenshots, and visual assets used in documentation and posts  
 - **`README.md`** – Overview of the challenge, key takeaways, and repo navigation  
-
 
 ---
 
