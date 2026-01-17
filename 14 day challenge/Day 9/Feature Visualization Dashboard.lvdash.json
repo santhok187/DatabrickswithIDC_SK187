@@ -1,0 +1,623 @@
+{
+  "datasets": [
+    {
+      "name": "0929ce0d",
+      "displayName": "week_sales_ratio",
+      "queryLines": [
+        "SELECT * FROM ecom.gold.week_sales_ratio"
+      ]
+    },
+    {
+      "name": "c1cb03d6",
+      "displayName": "pair_products",
+      "queryLines": [
+        "SELECT * FROM ecom.gold.pair_products"
+      ]
+    },
+    {
+      "name": "a1ef12b2",
+      "displayName": "popular_products",
+      "queryLines": [
+        "SELECT * FROM ecom.gold.popular_products"
+      ]
+    },
+    {
+      "name": "91c1e116",
+      "displayName": "conversion_rate",
+      "queryLines": [
+        "SELECT * FROM ecom.gold.conversion_rate"
+      ],
+      "catalog": "ecom",
+      "schema": "gold"
+    },
+    {
+      "name": "25930f77",
+      "displayName": "viewed",
+      "queryLines": [
+        "SELECT * FROM ecom.gold.viewed"
+      ]
+    },
+    {
+      "name": "943df436",
+      "displayName": "cart",
+      "queryLines": [
+        "SELECT * FROM ecom.gold.cart\r\n",
+        "WHERE brand IS NOT NULL OR category IS NOT NULL"
+      ],
+      "catalog": "ecom",
+      "schema": "gold"
+    }
+  ],
+  "pages": [
+    {
+      "name": "1df98837",
+      "displayName": "Sales features",
+      "layout": [
+        {
+          "widget": {
+            "name": "week-ratio-by-day-of-week-for-each-event-type",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "0929ce0d",
+                  "fields": [
+                    {
+                      "name": "event_type",
+                      "expression": "`event_type`"
+                    },
+                    {
+                      "name": "day_of_week",
+                      "expression": "`day_of_week`"
+                    },
+                    {
+                      "name": "week_ratio",
+                      "expression": "`week_ratio`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "day_of_week",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "week_ratio",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "event_type",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Week Ratio by Day of Week for Each Event Type",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "total-purchase-cart-conversion-view-conversion-rate",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "91c1e116",
+                  "fields": [
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    },
+                    {
+                      "name": "avg(Cart_conversionRate)",
+                      "expression": "AVG(`Cart_conversionRate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(Cart_conversionRate)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Cart Conversion Rate by Category",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "view-conversion-rate-by-category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "91c1e116",
+                  "fields": [
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    },
+                    {
+                      "name": "avg(View_conversionRate)",
+                      "expression": "AVG(`View_conversionRate`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(View_conversionRate)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "View Conversion Rate by Category",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 6,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "total-purchases-by-category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "91c1e116",
+                  "fields": [
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    },
+                    {
+                      "name": "sum(total_purchase)",
+                      "expression": "SUM(`total_purchase`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "category",
+                  "scale": {
+                    "type": "categorical",
+                    "sort": {
+                      "by": "y-reversed"
+                    }
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_purchase)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Total Purchases by Category",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 6,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "category-distribution",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a1ef12b2",
+                  "fields": [
+                    {
+                      "name": "sum(product_count)",
+                      "expression": "SUM(`product_count`)"
+                    },
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(product_count)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "category",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              },
+              "frame": {
+                "title": "Category Distribution",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 12,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "product-pairings",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "c1cb03d6",
+                  "fields": [
+                    {
+                      "name": "product_id_1",
+                      "expression": "`product_id_1`"
+                    },
+                    {
+                      "name": "product_id_2",
+                      "expression": "`product_id_2`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "product_id_1",
+                    "title": "product_id_1",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "type": "integer",
+                    "displayAs": "number"
+                  },
+                  {
+                    "fieldName": "product_id_2",
+                    "title": "product_id_2",
+                    "booleanValues": [
+                      "false",
+                      "true"
+                    ],
+                    "type": "integer",
+                    "displayAs": "number"
+                  }
+                ]
+              },
+              "invisibleColumns": [],
+              "allowHTMLByDefault": false,
+              "itemsPerPage": 25,
+              "paginationSize": "default",
+              "condensed": true,
+              "withRowNumber": false,
+              "frame": {
+                "title": "Product Pairings",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 12,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    },
+    {
+      "name": "b6dc2ffd",
+      "displayName": "Global Filters",
+      "layout": [
+        {
+          "widget": {
+            "name": "2652782b",
+            "queries": [
+              {
+                "name": "dashboards/01f0f3899c391a1c82426089471a1c51/datasets/01f0f38a1add16939077843ddac59992_category",
+                "query": {
+                  "datasetName": "943df436",
+                  "fields": [
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    },
+                    {
+                      "name": "category_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              },
+              {
+                "name": "dashboards/01f0f3899c391a1c82426089471a1c51/datasets/01f0f38a19e91db5b85c8e9f25e528d8_category",
+                "query": {
+                  "datasetName": "25930f77",
+                  "fields": [
+                    {
+                      "name": "category",
+                      "expression": "`category`"
+                    },
+                    {
+                      "name": "category_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "widgetType": "filter-single-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "category",
+                    "queryName": "dashboards/01f0f3899c391a1c82426089471a1c51/datasets/01f0f38a1add16939077843ddac59992_category"
+                  },
+                  {
+                    "fieldName": "category",
+                    "queryName": "dashboards/01f0f3899c391a1c82426089471a1c51/datasets/01f0f38a19e91db5b85c8e9f25e528d8_category"
+                  }
+                ]
+              },
+              "frame": {
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 1,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS"
+    },
+    {
+      "name": "21fc17b7",
+      "displayName": "product in view & cart",
+      "layout": [
+        {
+          "widget": {
+            "name": "number-of-products-per-category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "943df436",
+                  "fields": [
+                    {
+                      "name": "event_time",
+                      "expression": "`event_time`"
+                    },
+                    {
+                      "name": "price",
+                      "expression": "`price`"
+                    },
+                    {
+                      "name": "count(product_id)",
+                      "expression": "COUNT(`product_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "price",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(product_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "event_time",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Number of Products per Price with Event Time",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "product-views-by-category",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "25930f77",
+                  "fields": [
+                    {
+                      "name": "price",
+                      "expression": "`price`"
+                    },
+                    {
+                      "name": "monthly(event_time)",
+                      "expression": "DATE_TRUNC(\"MONTH\", `event_time`)"
+                    },
+                    {
+                      "name": "count(product_id)",
+                      "expression": "COUNT(`product_id`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "monthly(event_time)",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "count(product_id)",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "price",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "frame": {
+                "title": "Product Views by Category with event_time",
+                "showTitle": true
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
